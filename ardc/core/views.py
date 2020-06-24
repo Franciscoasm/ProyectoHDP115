@@ -9,10 +9,10 @@ Agregar Informacion/
 Iniciar Sesion/
 """
 def filtrar(request):
-    return HttpResponse("Filtrar Datos")
+    return render(request, "core/filtrar.html")
 
 def agregar(request):
-    return HttpResponse("Agregar Informacion")
+    return render(request, "core/agregar.html")
 
 def iniciar(request):
-    return HttpResponse("Iniciar Sesion")
+    return render(request, "core/iniciar.html")

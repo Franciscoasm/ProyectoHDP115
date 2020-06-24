@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/iniciar.jpg' %}{% endblock %}
+
+{% block headers %}
+<h1>Iniciar Sesion</h1>
+    <span class="subheading">Debe de ingresar datos correctos</span>
+{% endblock %}
+<!--Contenido-->
+{% block content %}
+    <div class="row project">  	
+        <div class="col-lg-3 col-md-4 offset-lg-1">
+            <img class="img-fluid" src="{% static 'core/img/logo.png' %}" alt="">
+        </div>
+        <div class="col-lg-7 col-md-8">
+            <h2 class="section-heading title">ARDC</h2>   
+            <form>
+                <label for="nusuario">Nombre de Usuario</label><br>
+                <input type="text" id="nusuraio" name="nusuario"><br>
+                <label for="keys">Contraseña</label><br>
+                <input type="text" id="keys" name="keys"><br>
+            </form>
+            <br>
+            <button>Iniciar</button>
+        </div>
+    </div>
+{% endblock%}
