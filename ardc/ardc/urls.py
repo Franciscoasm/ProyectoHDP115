@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core import views
+from core import views as core_views
+from agregar import views as agregar_views
 
 urlpatterns = [
     # Paths del core
-    path('', views.filtrar, name = "Filtrar"),
-    path('agregar/', views.agregar, name = "Agregar Infromacion"),
-    path('iniciar/', views.iniciar, name = "Iniciar Sesion"),
+    path('', core_views.filtrar, name = "Filtrar"),
+    path('agregar/', agregar_views.agregar, name = "Agregar Infromacion"),
+    path('iniciar/', core_views.iniciar, name = "Iniciar Sesion"),
     # Admin
     path('admin/', admin.site.urls),
 ]

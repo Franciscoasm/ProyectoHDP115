@@ -85,7 +85,7 @@
   }
   .table td,
   .table th {
-    background-color: #fff !important;
+    background-color: #f09c9c !important;
   }
   .table-bordered th,
   .table-bordered td {
@@ -124,7 +124,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #f59999;
 }
 
 [tabindex="-1"]:focus {
@@ -1871,7 +1871,7 @@ pre code {
 
 .form-control:focus {
   color: #495057;
-  background-color: #fff;
+  background-color: #a85353;
   border-color: #80bdff;
   outline: none;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);

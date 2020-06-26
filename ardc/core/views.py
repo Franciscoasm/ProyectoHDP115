@@ -11,8 +11,5 @@ Iniciar Sesion/
 def filtrar(request):
     return render(request, "core/filtrar.html")
 
-def agregar(request):
-    return render(request, "core/agregar.html")
-
 def iniciar(request):
     return render(request, "core/iniciar.html")
