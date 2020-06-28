@@ -9,8 +9,32 @@
     <span class="subheading">Debe de ingresar datos correctos</span>
 {% endblock %}
 
-{% block content %}
-<h2> Agregar Información</h2>
+<?php
+      $conexion=new PDO("sqlite:sqlite/db.sqlite3");
+     
+      $sql="SELECT idDepartamento, nombre_departamento FROM agregar_departamento";
+       $query=$conexion->prepare($sql);
+       $query->execute();
+      ?>
 
-<p>Aqui va a agregar información</p>
+
+
+
+
+{% block content %}
+<!---Aqui empezar-->
+  <img class="img-fluid" src="{% static 'core/img/logo.png' %}" alt="">
+  <form>
+    <label for="direcc">Direccion</label>
+    <input type="text" id="direcc" name="direcc"><br>
+    <label for="depa">Departamento</label>
+    <form id="combo" name="combo" action="guarda.php" method="POST">
+      <div>Departamento: <select id="cbx_depa" name="cbx_depa">
+        <option value="0">Selecionar Departamento</option>
+        <?php WHILE($row=$query->fetch_assoc()) { ?>
+          <option value="<?php echo $row['idDepartamento']; ?>"><?php echo $row['nombre_departamento']; ?></option>
+      </select>
+      </div>
+    </form>
+  </form>
 {% endblock%}
