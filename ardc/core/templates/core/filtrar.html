@@ -10,6 +10,107 @@
 {% endblock %}
 
 {% block content %}
-<h2> Filtrar</h2>
-<p>Aqui se va a filtrar</p>
+<!--Imagen del logotipo de la app-->
+    <div align = "center">
+        <img class="img-fluid" src="{% static 'core/img/logo.png' %}" alt="">
+    </div>
+
+<!--Informacion sobre la app y sobre lo que trata-->
+    <div align = "Center">
+        <p>Infromacion de la app</p>
+        <br>
+        <p>Para que sirve la app</p>
+    </div>
+    <br>
+<!--Filtrado de datos-->
+    <div class = "container">
+        <label><h4>Filtrar Datos por:</h4></label>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <label class="col-form-label" for="inputDepartamento"><h5>Departamento:</h5></label>
+                        {{ form.departamento.label_tag }} 
+                        {{ form.departamento }}
+                    
+                </div>
+                <div class="col">
+                    <label class="col-form-label" for="inputMunicipio"><h5>Municipio:</h5></label>
+                    {{ form.municipio.label_tag }}  
+                    {{ form.municipio }}
+                    
+                </div>
+
+                <div class="col">
+                    <label class="col-form-label" for="inputAyuda"><h5>Tipo de Ayuda:</h5></label>
+                    <select class="form-control">
+<!--Arreglar este modelo-->
+                    {% for ayuda in ayudas %}
+                    <option value = {{ayudas.idBeneficio}}>{{ayudas.nombre_beneficio}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="col-form-label" for="inputEntidad"><h5>Entidad:</h5></label>
+                    <select class="form-control">
+<!--Arreglar este modelo-->
+                    {% for entidad in entidades %}
+                    <option value = {{entidades.idEntidad}}>{{entidades.nombre_entidad}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <button type="button" class="btn btn-dark"><h8>Filtrar</h8></button>
+            </div>
+        </form>
+        
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+                $("#id_departamento").on("change", getMunicipios);
+            });
+
+            function getMunicipios() {
+                var departamentoId = $("#id_departamento").val();
+                if (departamentoId) {
+                    // Eliminamos las opciones anteriores del select
+                    $("#id_municipio").html("");
+                    var request = $.ajax({
+                        type: "GET",
+                        url: "{% url 'get_municipios' %}",
+                        data: {
+                            "departamento_id": departamentoId,
+                        },
+                    });
+                    request.done(function(response) {
+                        // Agregamos los resultados al select
+                        $("#id_municipio").html(response.municipios);
+                        $("#id_municipio").trigger("change");
+                    });
+                } else {
+                    $("#id_municipio").html("<option value='' selected='selected'>--------</option>");
+                    $("#id_municipio").trigger("change");
+                }
+            }    
+
+        </script>
+       
+    </div>    
 {% endblock%}
+
+<!--Aquí se va a insertar la tabla que muestra los datos (La tabla principal)
+Dicha tabla contiene [Departamento, Municipio, Beneficio, Benefactor]-->
+
+
+
+
+
+{% block footer%}
+    <br></br>
+    <div align = "center" class="container">
+        <a href="{% url 'Iniciar Sesion' %}"><button type="button" class="btn btn-link" pull-righ>Iniciar Sesión</button></a> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label>Si desea agregar información, Haga click Aquí</label>
+        <a href="{% url 'Agregar Infromacion' %}"><button type="button" class="btn btn-dark" pull-left><h8>Aquí</h8></button></a>
+    </div>
+{% endblock %} 
